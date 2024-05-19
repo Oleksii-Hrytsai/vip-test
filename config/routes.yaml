@@ -1,3 +1,8 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+product_list:
+  path: /
+  controller: App\Controller\ProductController::index
+
+product_report:
+  path: /products/report
+  controller: App\Controller\ProductController::report
+

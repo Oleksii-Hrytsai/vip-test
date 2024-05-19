@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product Report{% endblock %}
+
+{% block body %}
+    <h1>Product Report</h1>
+    {% for code, data in report %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <h2>Code {{ code }}</h2>
+            </div>
+            <div class="card-body">
+                <p>Total Quantity: {{ data.total_quantity }}</p>
+                <p>Total Price: {{ data.total_price }}</p>
+                <ul class="list-group">
+                    {% for type, typeData in data.types %}
+                        <li class="list-group-item">
+                            {{ type }} - Quantity: {{ typeData.quantity }}, Price: {{ typeData.price }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

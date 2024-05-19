@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block body %}
+    <h1>Products</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><a href="{{ path('product_list', {'sort': 'code', 'direction': sort == 'code' and direction == 'asc' ? 'desc' : 'asc'}) }}">Code</a></th>
+            <th><a href="{{ path('product_list', {'sort': 'name', 'direction': sort == 'name' and direction == 'asc' ? 'desc' : 'asc'}) }}">Name</a></th>
+            <th><a href="{{ path('product_list', {'sort': 'type', 'direction': sort == 'type' and direction == 'asc' ? 'desc' : 'asc'}) }}">Type</a></th>
+            <th><a href="{{ path('product_list', {'sort': 'price', 'direction': sort == 'price' and direction == 'asc' ? 'desc' : 'asc'}) }}">Price</a></th>
+            <th><a href="{{ path('product_list', {'sort': 'createdAt', 'direction': sort == 'createdAt' and direction == 'asc' ? 'desc' : 'asc'}) }}">Created At</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.code }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.type }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <ul class="pagination">
+            {% for i in 1..pagesCount %}
+                <li class="page-item {% if i == currentPage %}active{% endif %}">
+                    <a class="page-link" href="{{ path('product_list', {'page': i, 'sort': sort, 'direction': direction}) }}">{{ i }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
